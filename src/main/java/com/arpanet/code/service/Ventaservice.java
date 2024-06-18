@@ -14,6 +14,8 @@ public interface Ventaservice {
     public void deleteVenta(Long id);
     public Optional<VentaEntitie> getVenta(Long id);
     public int crearVentaSql(VentaEntitie venta);
+    public int actualizarVentaSql(VentaEntitie venta);
+    public int borrarVentaSql(Long id);
 
 }
 

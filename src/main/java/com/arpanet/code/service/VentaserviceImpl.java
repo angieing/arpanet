@@ -48,7 +48,7 @@ public class VentaserviceImpl implements Ventaservice{
 	public List<VentaEntitie> listaAll() {
 		List<VentaEntitie> lista = new ArrayList<>();
 		List<Object[]> ver = VentaRepositorio.buscar();	
-		System.out.println("====>>> " + ver.get(1)[1]);	
+		
         for (int i = 0; i < ver.size(); i++) {
             VentaEntitie obj = new VentaEntitie();
 			BigDecimal x = (BigDecimal) ver.get(i)[0];
@@ -74,5 +74,27 @@ public class VentaserviceImpl implements Ventaservice{
         retorno = VentaRepositorio.guardarVenta(objContrato.getFecha(), objContrato.getSubtotal(), objContrato.getImpuestos(), objContrato.getTotal());
         return retorno;
     }
+
+	/**
+	 * Actualizar tabla ventas
+	 */
+	@Override
+	public int actualizarVentaSql(VentaEntitie venta){
+		int retorno = 0;
+		try {
+			retorno = VentaRepositorio.actualizarVenta(venta.getId(), venta.getImpuestos());
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		return retorno;
+	}
+
+	@Override
+	public int borrarVentaSql(Long id){
+		int retorno = 0;
+		retorno = VentaRepositorio.borrar(id);
+		return retorno;
+	}
 
 }

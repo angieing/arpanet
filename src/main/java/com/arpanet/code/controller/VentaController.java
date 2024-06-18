@@ -75,21 +75,25 @@ public class VentaController {
 		return new ResponseEntity<VentaEntitie>(Venta, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
+	/*@DeleteMapping("/{id}")
 	public ResponseEntity<VentaEntitie> deleteVenta(@PathVariable("id") Long id){
 		service.deleteVenta(id);
 		return ResponseEntity.ok().build();
+	}*/
+
+	@PutMapping("/{id}")
+	public int updateVenta(@PathVariable("id") Long id, @Valid @RequestBody VentaEntitie venta) {
+		VentaEntitie dbVenta = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("Venta No enocntrado"));
+		dbVenta.setFecha(venta.getFecha());
+		dbVenta.setSubtotal(venta.getSubtotal());
+		dbVenta.setImpuestos(venta.getImpuestos());
+		dbVenta.setTotal(venta.getTotal());		
+		return service.actualizarVentaSql(dbVenta);
 	}
 
-	/*@PutMapping("/{id}")
-	public Venta updateVenta(@PathVariable("id") Long id, @Valid @RequestBody Venta Venta) {
-		Venta dbVenta = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("Venta No enocntrado"));
-		dbVenta.setNombres(Venta.getNombres());
-		dbVenta.setApellidos(Venta.getApellidos());
-		dbVenta.setDireccion(Venta.getDireccion());
-		dbVenta.setEdad(Venta.getEdad());
-		dbVenta.setCiudad(Venta.getCiudad());
-		dbVenta.setPais(Venta.getPais());
-		return service.updateVenta(dbVenta);
-	}*/
+	@DeleteMapping("/{id}")
+	public ResponseEntity<VentaEntitie> deleteVentaSql(@PathVariable("id") Long id){
+		service.borrarVentaSql(id);
+		return ResponseEntity.ok().build();
+	}
 }

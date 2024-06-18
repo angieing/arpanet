@@ -46,5 +46,8 @@ public class VentaEntitie{
         Float total;
         //@NotBlank(message = "Direccion es requerida")
         //@Size(min = 5, max = 50)
+
+        Integer vendedor;
+        Integer cliente;
        
 }

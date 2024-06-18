@@ -26,4 +26,14 @@ public interface VentaRepositorio extends JpaRepository<VentaEntitie, Long> {
     @Query(value="insert into ventas  VALUES (sec_ventas.nextval, :fecha, :subtotal, :impuestos, :total)", nativeQuery=true)
     int guardarVenta(@Param("fecha") Date fecha, @Param("subtotal") Float subtotal, @Param("impuestos") Float impuestos, @Param("total")Float total);
 
+    @Transactional 
+    @Modifying
+    @Query(value="update ventas set subtotal =:valor where subtotal =:id", nativeQuery=true)
+    int actualizarVenta(@Param("id") Long id, @Param("valor") Float valor);
+
+    @Transactional
+    @Modifying
+    @Query(value="DELETE FROM ventas n WHERE n.id_factura =:id", nativeQuery=true)
+    int borrar(@Param("id") Long id);
+
 }
