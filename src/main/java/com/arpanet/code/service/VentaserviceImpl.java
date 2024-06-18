@@ -67,4 +67,12 @@ public class VentaserviceImpl implements Ventaservice{
 		return lista;
 	}
 
+	/** inserta ventas nativa */
+	@Override
+    public int crearVentaSql(VentaEntitie objContrato) {
+        int retorno = 0;		
+        retorno = VentaRepositorio.guardarVenta(objContrato.getFecha(), objContrato.getSubtotal(), objContrato.getImpuestos(), objContrato.getTotal());
+        return retorno;
+    }
+
 }

@@ -40,13 +40,26 @@ public class VentaController {
     }
 	
 	
-	@GetMapping(value = "listar/ventas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "listar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> listar() {
 		System.out.println("verentraraqui>>");
 		List<VentaEntitie> Ventas = new ArrayList<>();
 		 Ventas = service.listaAll();
 		 System.out.println("Resultado:>>" + Ventas.getClass().getSimpleName());
 		return new ResponseEntity<>(Ventas, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "crear")
+	public ResponseEntity<VentaEntitie> crearVentaSql(@Valid @RequestBody VentaEntitie venta){
+		System.out.println("Venta BODY: " + venta);
+		try {
+			int ver = service.crearVentaSql(venta);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Venta registrada: " + e.getMessage());
+		}
+				
+		return new ResponseEntity<VentaEntitie>(HttpStatus.CREATED);
 	}
 	
 	@PostMapping

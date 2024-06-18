@@ -9,10 +9,11 @@ public interface Ventaservice {
 	
     public List<VentaEntitie> findVentaAll();
     public List<VentaEntitie> listaAll();
-    public VentaEntitie createVenta(VentaEntitie Venta);
-    public VentaEntitie updateVenta(VentaEntitie Venta);
+    public VentaEntitie createVenta(VentaEntitie venta);    
+    public VentaEntitie updateVenta(VentaEntitie venta);
     public void deleteVenta(Long id);
     public Optional<VentaEntitie> getVenta(Long id);
+    public int crearVentaSql(VentaEntitie venta);
 
 }
 
