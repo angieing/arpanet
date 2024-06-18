@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Venderv3" directorySegmentName="seg_0" id="C0BFABD6-606F-65E7-467C-DECB91623138">
+<createdBy>Angie Lozano</createdBy>
+<createdTime>2024-06-18 15:35:29 UTC</createdTime>
+<ownerDesignName>modeloRelacional</ownerDesignName>
+<engineerTo>
+<item key="41AB7767-AD12-6534-DE41-F4E6CA8189B1" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>784204B7-FCC2-ECD1-5BC0-FF956E382F3D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>E25985F4-2B62-CD61-CB37-B775E1C8895E</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

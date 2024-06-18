@@ -1,0 +1,17 @@
+CREATE TABLE TBL_Ventas(
+    ID            				NUMERIC(4) NOT NULL PRIMARY KEY,
+    NOMBRES          			VARCHAR2(60) NOT NULL UNIQUE,
+    APELLIDOS        			VARCHAR2(300) NOT NULL,
+    DIRECCION			        VARCHAR2(150) NULL,
+    EDAD           			    INTEGER NOT NULL,
+    CIUDAD           			VARCHAR2(50),
+    PAIS           			    VARCHAR2(50),
+   CONSTRAINT PK_TBL_Ventas PRIMARY KEY (ID)
+ );
+
+CREATE SEQUENCE SEQ_Ventas;
+
+INSERT INTO TBL_Ventas (ID, NOMBRES, APELLIDOS, DIRECCION, EDAD, CIUDAD, PAIS) VALUES (SEQ_Ventas.NEXTVAL, 'arpanet', 'MENDOZA', 'Calle 41 San Jose',28,'Barranquilla', 'Colombia');
+INSERT INTO TBL_Ventas (ID, NOMBRES, APELLIDOS, DIRECCION, EDAD, CIUDAD, PAIS) VALUES (SEQ_Ventas.NEXTVAL, 'OMAR', 'BERROTERAN', 'Bo grenada Casa C22',27,'Managua', 'Nicaragua');
+
+COMMIT;
