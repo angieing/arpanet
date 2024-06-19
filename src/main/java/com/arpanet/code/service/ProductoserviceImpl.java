@@ -28,9 +28,9 @@ public class ProductoserviceImpl implements Productosservice{
 		
         for (int i = 0; i < prod.size(); i++) {
             ProductosEntitie obj = new ProductosEntitie();			
-			obj.setId(((BigDecimal) prod.get(i)[1]).longValue());
-			obj.setNombre(String.valueOf(prod.get(i)[2]));
-			obj.setPorcentaje_impuesto(((BigDecimal)(prod.get(i)[3])).floatValue());
+			obj.setId(((BigDecimal) prod.get(i)[0]).longValue());
+			obj.setNombre(String.valueOf(prod.get(i)[1]));
+			obj.setPorcentaje_impuesto(((BigDecimal)(prod.get(i)[2])).floatValue());
 					
             lista.add(obj);
         }       
