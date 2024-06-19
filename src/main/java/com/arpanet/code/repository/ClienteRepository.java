@@ -24,12 +24,12 @@ public interface ClienteRepository extends JpaRepository<ClienteEntitie, Long> {
     @Transactional 
     @Modifying
     @Query(value="insert into clientes  VALUES (:tipo_identificacion, :identificacion, :nombres, :apellidos, :telefono, :direccion, :correo)", nativeQuery=true)
-    int guardarVenta(@Param("tipo_identificacion") String tipo_identificacion,@Param("identificacion") Long identificacion,  @Param("nombres") String nombres, @Param("apellidos")String apellidos, @Param("telefono")String telefono, @Param("direccion")String direccion,@Param("correo") String correo);
+    int guardar(@Param("tipo_identificacion") String tipo_identificacion,@Param("identificacion") Long identificacion,  @Param("nombres") String nombres, @Param("apellidos")String apellidos, @Param("telefono")String telefono, @Param("direccion")String direccion,@Param("correo") String correo);
 
     @Transactional 
     @Modifying
     @Query(value="update clientes set nombres =:valor where identificacion =:id", nativeQuery=true)
-    int actualizarVenta(@Param("id") Long id, @Param("valor") String valor);
+    int actualizar(@Param("id") Long id, @Param("valor") String valor);
 
     @Transactional
     @Modifying

@@ -49,7 +49,7 @@ public class ClienteserviceImpl implements Clienteservice{
 	@Override
     public int crearVentaSql(ClienteEntitie obj) {
         int retorno = 0;		
-        retorno = clienteRepository.guardarVenta(obj.getTipoIdentificacion(), obj.getId(), obj.getNombres(), obj.getApellidos(),obj.getTelefono(),obj.getDireccion(),obj.getCorreo());
+        retorno = clienteRepository.guardar(obj.getTipoIdentificacion(), obj.getId(), obj.getNombres(), obj.getApellidos(),obj.getTelefono(),obj.getDireccion(),obj.getCorreo());
         return retorno;
     }
 
@@ -60,7 +60,7 @@ public class ClienteserviceImpl implements Clienteservice{
 	public int actualizarVentaSql(ClienteEntitie venta){
 		int retorno = 0;
 		try {
-			retorno = clienteRepository.actualizarVenta(venta.getId(), venta.getNombres());
+			retorno = clienteRepository.actualizar(venta.getId(), venta.getNombres());
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
