@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arpanet.code.exception.ModeloNotFoundException;
+import com.arpanet.code.model.VendedorEntitie;
 import com.arpanet.code.model.VentaEntitie;
+import com.arpanet.code.service.Clienteservice;
+import com.arpanet.code.service.Vendedoresservice;
 import com.arpanet.code.service.Ventaservice;
 
 import java.util.ArrayList;
@@ -23,8 +26,11 @@ import javax.validation.Valid;
 import org.springframework.http.MediaType;
 
 @RestController
-@RequestMapping("/vendedor")
+@RequestMapping("/vendedores")
 public class VendedorController {
+
+	@Autowired
+	private Vendedoresservice service;
 
     @GetMapping("validar-sesion")
     public ResponseEntity<?> validarSesion() {        
@@ -35,5 +41,70 @@ public class VendedorController {
             return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * listar vendedores
+     * @return
+     */
+    @GetMapping(value = "listar", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> listar() {
+		
+		List<VendedorEntitie> vendedores = new ArrayList<>();
+		 vendedores = service.listaAll(); 
+         System.out.println("verentraraqui>>" + vendedores.size());
+		return new ResponseEntity<>(vendedores, HttpStatus.OK);
+	}
+
+    /**
+     * Crear vendedores
+     * @param venta
+     * @return
+     */
+	@PostMapping(value = "crear")
+	public ResponseEntity<VendedorEntitie> crearVentaSql(@Valid @RequestBody VendedorEntitie vendedores){
+		System.out.println(" BODY: " + vendedores);
+		try {
+			int ver = service.crearVentaSql(vendedores);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("error:: " + e.getMessage());
+		}
+				
+		return new ResponseEntity<VendedorEntitie>(HttpStatus.CREATED);
+	}
+
+    @GetMapping("/{id}")
+	public ResponseEntity<VendedorEntitie> getVentaById(@PathVariable("id") Long id){
+		System.out.println("Est:>>" + id);
+		VendedorEntitie vendedores = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("No encontrado $id: "+ id));
+		return new ResponseEntity<VendedorEntitie>(vendedores, HttpStatus.OK);
+	}
+
+	/*@DeleteMapping("/{id}")
+	public ResponseEntity<VendedorEntitie> deleteVenta(@PathVariable("id") Long id){
+		service.deleteVenta(id);
+		return ResponseEntity.ok().build();
+	}*/
+
+	@PutMapping("/{id}")
+	public int updateVenta(@PathVariable("id") Long id, @Valid @RequestBody VendedorEntitie vendedores) {
+		System.out.println("==========>>> " + vendedores + " /// "+ id);
+        VendedorEntitie vendedoresUp = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("No encontrado"));
+		vendedoresUp.setTipoIdentificacion(vendedores.getTipoIdentificacion());
+		vendedoresUp.setId(vendedores.getId());
+		vendedoresUp.setNombres(vendedores.getNombres());
+		vendedoresUp.setApellidos(vendedores.getApellidos());	
+		vendedoresUp.setTelefono(vendedores.getTelefono());	
+		vendedoresUp.setDireccion(vendedores.getDireccion());	
+		vendedoresUp.setCorreo(vendedores.getCorreo());
+		
+		return service.actualizarVentaSql(vendedoresUp);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<VendedorEntitie> deleteVentaSql(@PathVariable("id") Long id){
+		service.borrarVentaSql(id);
+		return ResponseEntity.ok().build();
+	}
 
 }

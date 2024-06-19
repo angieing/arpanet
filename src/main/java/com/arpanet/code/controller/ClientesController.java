@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arpanet.code.exception.ModeloNotFoundException;
 import com.arpanet.code.model.ClienteEntitie;
 import com.arpanet.code.service.Clienteservice;
-import com.arpanet.code.service.Ventaservice;
 
 import java.util.ArrayList;
 import java.util.List;
