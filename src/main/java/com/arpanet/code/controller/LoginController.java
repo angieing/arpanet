@@ -61,6 +61,9 @@ public class LoginController {
             if (out.getStatus().equals(HttpStatus.UNAUTHORIZED)) {
                 throw new ResponseStatusException(out.getStatus());
             }
+            if(out.getStatus().equals(HttpStatus.CONFLICT)){
+                throw new ResponseStatusException(out.getStatus());
+            }
             return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(out, HttpStatus.BAD_REQUEST);

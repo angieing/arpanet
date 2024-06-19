@@ -9,6 +9,8 @@ import com.arpanet.code.dto.UserDTO;
 import com.arpanet.code.model.UsuarioEntitie;
 import com.arpanet.code.repository.UserRepository;
 import com.arpanet.code.respuestas.Respuesta;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,10 +26,12 @@ public class LoginImplService implements LoginService {
     public Respuesta validarCredenciales(String usuario, String password) {
         Respuesta out = new Respuesta();
         try {
+            List<Object[]> ob = userRepository.buscar();
             Optional<UsuarioEntitie> pasEncode = userRepository.findByUsuario(usuario);
+            System.out.println("error: " + pasEncode);
             //Boolean ex = userRepository.existsByUsuarioAndPass(usuario, password);
             if (pasEncode.isPresent()) {              
-                    UsuarioEntitie obj = userRepository.getLogin(usuario, pasEncode.get().getPass());
+                Optional<UsuarioEntitie> obj = userRepository.findByUsuarioAndPass(usuario, pasEncode.get().getPass());
                     if (obj != null) {
                         UserDTO objDto = modelMapper.map(obj, UserDTO.class);
                         out.setObj(objDto.getId());

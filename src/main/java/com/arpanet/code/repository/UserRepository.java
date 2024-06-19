@@ -15,7 +15,9 @@ import com.arpanet.code.model.UsuarioEntitie;
 public interface UserRepository extends JpaRepository<UsuarioEntitie, Long> {
     Optional<UsuarioEntitie> findByUsuario(String username);
     //Boolean existsByUsuarioAndPass(String username, String password);
+      
+    Optional<UsuarioEntitie> findByUsuarioAndPass(String usuario, String password);
 
-    @Query(value="select usuario, pass from usuarios where usuario=:usuario and pass=:password", nativeQuery = true)
-    UsuarioEntitie getLogin(String usuario, String password);
+    @Query(value = " select * from usuarios ", nativeQuery = true)
+    List<Object[]> buscar();
 }
