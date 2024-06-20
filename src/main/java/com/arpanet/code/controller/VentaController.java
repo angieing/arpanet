@@ -84,11 +84,13 @@ public class VentaController {
 	@PutMapping("/{id}")
 	public int updateVenta(@PathVariable("id") Long id, @Valid @RequestBody VentaEntitie venta) {
 		VentaEntitie dbVenta = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("Venta No enocntrado"));
+		System.out.println("EXITE?:: " +dbVenta);
 		dbVenta.setFecha(venta.getFecha());
 		dbVenta.setSubtotal(venta.getSubtotal());
 		dbVenta.setImpuestos(venta.getImpuestos());
 		dbVenta.setTotal(venta.getTotal());		
-		return service.actualizarVentaSql(dbVenta);
+		System.out.println("SIEXITE?:: " +dbVenta);
+		return service.actualizarVentaSql(id,dbVenta);
 	}
 
 	@DeleteMapping("/{id}")

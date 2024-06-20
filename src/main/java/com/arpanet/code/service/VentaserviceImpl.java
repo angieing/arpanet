@@ -83,10 +83,13 @@ public class VentaserviceImpl implements Ventaservice{
 	 * Actualizar tabla ventas
 	 */
 	@Override
-	public int actualizarVentaSql(VentaEntitie venta){
+	public int actualizarVentaSql(Long id,VentaEntitie venta){
+		
 		int retorno = 0;
 		try {
-			retorno = ventaRepositorio.actualizarVenta(venta.getId(), venta.getImpuestos());
+			System.out.println("REsibe?:: " +venta);
+			retorno = ventaRepositorio.actualizarVenta(id, venta.getSubtotal());
+			System.out.println("etorna?:: " +retorno);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}

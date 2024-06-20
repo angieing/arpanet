@@ -28,7 +28,7 @@ public interface VentaRepositorio extends JpaRepository<VentaEntitie, Long> {
 
     @Transactional 
     @Modifying
-    @Query(value="update ventas set subtotal =:valor where subtotal =:id", nativeQuery=true)
+    @Query(value="update ventas set subtotal =:valor where id_factura =:id", nativeQuery=true)
     int actualizarVenta(@Param("id") Long id, @Param("valor") Float valor);
 
     @Transactional
