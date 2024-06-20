@@ -45,7 +45,7 @@ public class VentaController {
 		System.out.println("verentraraqui>>");
 		List<VentaEntitie> Ventas = new ArrayList<>();
 		 Ventas = service.listaAll();
-		 System.out.println("Resultado:>>" + Ventas.getClass().getSimpleName());
+		 System.out.println("Resultado:>>" + Ventas);
 		return new ResponseEntity<>(Ventas, HttpStatus.OK);
 	}
 

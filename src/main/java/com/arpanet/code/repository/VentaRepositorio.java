@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface VentaRepositorio extends JpaRepository<VentaEntitie, Long> {
 
-    @Query(value = " select * from ventas ", nativeQuery = true)
-        List<Object[]> buscar();
+    @Query(value = "select * from ventas", nativeQuery = true)
+    List<Object[]> buscar();
 
     @Transactional 
     @Modifying
-    @Query(value="insert into ventas  VALUES (sec_ventas.nextval, :fecha, :subtotal, :impuestos, :total)", nativeQuery=true)
-    int guardarVenta(@Param("fecha") Date fecha, @Param("subtotal") Float subtotal, @Param("impuestos") Float impuestos, @Param("total")Float total);
+    @Query(value="insert into ventas  VALUES (sec_ventas.nextval, :fecha, :subtotal, :impuestos, :total, :vendedor, :cliente, :tipoClientes, :tipoVendedor)", nativeQuery=true)
+    int guardarVenta(@Param("fecha") Date fecha, @Param("subtotal") Float subtotal, @Param("impuestos") Float impuestos, @Param("total")Float total,@Param("vendedor") Integer vendedor, @Param("cliente")Integer cliente, @Param("tipoClientes") String tipoClientes, @Param("tipoVendedor") String tipoVendedor);
 
     @Transactional 
     @Modifying

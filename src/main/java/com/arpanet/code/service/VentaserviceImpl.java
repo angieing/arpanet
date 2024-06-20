@@ -17,37 +17,37 @@ import com.arpanet.code.repository.VentaRepositorio;
 public class VentaserviceImpl implements Ventaservice{
 
 	@Autowired
-	private VentaRepositorio VentaRepositorio;
+	private VentaRepositorio ventaRepositorio;
 	
 	@Override
 	public List<VentaEntitie> findVentaAll() {
-		return VentaRepositorio.findAll();
+		return ventaRepositorio.findAll();
 	}
 
 	@Override
 	public VentaEntitie createVenta(VentaEntitie venta) {
-		return VentaRepositorio.saveAndFlush(venta);
+		return ventaRepositorio.saveAndFlush(venta);
 	}
 
 	@Override
 	public VentaEntitie updateVenta(VentaEntitie Venta) {
-		return VentaRepositorio.save(Venta);
+		return ventaRepositorio.save(Venta);
 	}
 
 	@Override
 	public void deleteVenta(Long id) {
-		VentaRepositorio.deleteById(id);
+		ventaRepositorio.deleteById(id);
 	}
 
 	@Override
 	public Optional<VentaEntitie> getVenta(Long id) {
-		return VentaRepositorio.findById(id);
+		return ventaRepositorio.findById(id);
 	}
 
 	@Override
 	public List<VentaEntitie> listaAll() {
 		List<VentaEntitie> lista = new ArrayList<>();
-		List<Object[]> ver = VentaRepositorio.buscar();	
+		List<Object[]> ver = ventaRepositorio.buscar();	
 		
         for (int i = 0; i < ver.size(); i++) {
             VentaEntitie obj = new VentaEntitie();
@@ -62,6 +62,10 @@ public class VentaserviceImpl implements Ventaservice{
 			obj.setSubtotal(a.floatValue());
 			obj.setImpuestos(((BigDecimal)ver.get(i)[3]).floatValue());
 			obj.setTotal(((BigDecimal)ver.get(i)[4]).floatValue());
+			obj.setVendedor(((BigDecimal)ver.get(i)[5]).intValue());
+			obj.setCliente(((BigDecimal)ver.get(i)[6]).intValue());
+			obj.setTipo_clientes(String.valueOf(ver.get(i)[7]));
+			obj.setTipo_vendedor(String.valueOf(ver.get(i)[8]));
             lista.add(obj);
         }       
 		return lista;
@@ -69,9 +73,9 @@ public class VentaserviceImpl implements Ventaservice{
 
 	/** inserta ventas nativa */
 	@Override
-    public int crearVentaSql(VentaEntitie objContrato) {
+    public int crearVentaSql(VentaEntitie obj) {
         int retorno = 0;		
-        retorno = VentaRepositorio.guardarVenta(objContrato.getFecha(), objContrato.getSubtotal(), objContrato.getImpuestos(), objContrato.getTotal());
+        retorno = ventaRepositorio.guardarVenta(obj.getFecha(), obj.getSubtotal(), obj.getImpuestos(), obj.getTotal(), obj.getVendedor(),obj.getCliente(),obj.getTipo_clientes(),obj.getTipo_vendedor());
         return retorno;
     }
 
@@ -82,7 +86,7 @@ public class VentaserviceImpl implements Ventaservice{
 	public int actualizarVentaSql(VentaEntitie venta){
 		int retorno = 0;
 		try {
-			retorno = VentaRepositorio.actualizarVenta(venta.getId(), venta.getImpuestos());
+			retorno = ventaRepositorio.actualizarVenta(venta.getId(), venta.getImpuestos());
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
@@ -93,7 +97,7 @@ public class VentaserviceImpl implements Ventaservice{
 	@Override
 	public int borrarVentaSql(Long id){
 		int retorno = 0;
-		retorno = VentaRepositorio.borrar(id);
+		retorno = ventaRepositorio.borrar(id);
 		return retorno;
 	}
 

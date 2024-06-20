@@ -49,5 +49,7 @@ public class VentaEntitie{
 
         Integer vendedor;
         Integer cliente;
+        String tipo_clientes;
+        String tipo_vendedor;
        
 }
