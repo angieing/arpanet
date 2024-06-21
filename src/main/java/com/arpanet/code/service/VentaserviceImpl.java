@@ -143,7 +143,9 @@ public class VentaserviceImpl implements Ventaservice{
             VentasDTO obj = new VentasDTO();		         
             obj.setId(((BigDecimal)ver.get(i)[0]).longValue());
             obj.setNombres(String.valueOf(ver.get(i)[1]));
-			obj.setTotalVentas(String.valueOf(ver.get(i)[2]));					
+			obj.setApellidos(String.valueOf(ver.get(i)[2]));
+			obj.setTotalVentas(String.valueOf(ver.get(i)[3]));
+
             lista.add(obj);
         }       
 		return lista;
@@ -177,6 +179,23 @@ public class VentaserviceImpl implements Ventaservice{
             VentasDTO obj = new VentasDTO();		         
             obj.setCliente(((BigDecimal)ver.get(i)[0]).intValue());
             obj.setNombres((String)ver.get(i)[1]);
+			obj.setTotal(((BigDecimal)ver.get(i)[2]).floatValue());				
+            lista.add(obj);
+        }       
+		return lista;
+	}
+
+	@Override
+	public List<VentasDTO> buscarVentasAnioMesEspecifico() {
+		List<VentasDTO> lista = new ArrayList<>();
+		List<Object[]> ver = ventaRepositorio.buscarAnioMesEspecifico();	
+		System.out.println("ver: " + ver.get(0)[0].getClass().getSimpleName());
+		System.out.println("ver: " + ver.get(0)[1].getClass().getSimpleName());
+		System.out.println("ver: " + ver.get(0)[2].getClass().getSimpleName());		
+        for (int i = 0; i < ver.size(); i++) {
+            VentasDTO obj = new VentasDTO();
+			obj.setMes(((BigDecimal)ver.get(i)[0]));		         
+            obj.setAnio(((BigDecimal)ver.get(i)[1]));            
 			obj.setTotal(((BigDecimal)ver.get(i)[2]).floatValue());				
             lista.add(obj);
         }       

@@ -23,6 +23,7 @@ public interface Ventaservice {
     public List<VentasDTO> buscarMasVendidoVendedor();
     public List<VentasDTO> buscarPorAnioEspecifico(int anio);
     public List<VentasDTO> buscarPromedioVentasCliente();
+    public List<VentasDTO> buscarVentasAnioMesEspecifico();    
 
 }
 

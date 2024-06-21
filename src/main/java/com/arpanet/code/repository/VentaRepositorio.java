@@ -62,4 +62,8 @@ public interface VentaRepositorio extends JpaRepository<VentaEntitie, Long> {
     " GROUP BY v.cliente,c.nombres ||' '|| c.apellidos ", nativeQuery = true)
     List<Object[]> buscarPromedioVentasCliente();
 
+    @Query(value = " SELECT  EXTRACT (MONTH FROM fecha) AS Mes, EXTRACT (YEAR FROM fecha) AS Año, SUM(total) AS Total " +
+    " FROM ventas GROUP BY EXTRACT (MONTH FROM fecha), EXTRACT (YEAR FROM fecha)", nativeQuery = true)
+    List<Object[]> buscarAnioMesEspecifico();
+
 }

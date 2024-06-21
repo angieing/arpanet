@@ -145,6 +145,16 @@ public class VentaController {
 		return new ResponseEntity<>(Ventas, HttpStatus.OK);
 	}
 
+	/**
+	 *  Cuanto se ha vendido en un año y mes específico
+	 * @return
+	 */
+	@GetMapping(value = "/anio-mes", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> buscarVentasAnioMesEspecifico() {		
+		List<VentasDTO> Ventas = new ArrayList<>();		
+		 Ventas = service.buscarVentasAnioMesEspecifico();		 
+		return new ResponseEntity<>(Ventas, HttpStatus.OK);
+	}
 
 
 }

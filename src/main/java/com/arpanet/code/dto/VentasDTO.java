@@ -17,7 +17,9 @@ public class VentasDTO{
    private String tipo_clientes;
    private String tipo_vendedor;
    private String nombres;
+   private String apellidos;
    private String totalVentas;
    private BigDecimal anio;
+   private BigDecimal mes;
    
 }
