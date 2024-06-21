@@ -24,12 +24,12 @@ public interface VendedoresRepository extends JpaRepository<VendedorEntitie, Lon
     @Transactional 
     @Modifying
     @Query(value="insert into vendedores  VALUES (:tipo_identificacion, :identificacion, :nombres, :apellidos, :telefono, :direccion, :correo)", nativeQuery=true)
-    int guardarVenta(@Param("tipo_identificacion") String tipo_identificacion,@Param("identificacion") Long identificacion,  @Param("nombres") String nombres, @Param("apellidos")String apellidos, @Param("telefono")String telefono, @Param("direccion")String direccion,@Param("correo") String correo);
+    int guardarVendedor(@Param("tipo_identificacion") String tipo_identificacion,@Param("identificacion") Long identificacion,  @Param("nombres") String nombres, @Param("apellidos")String apellidos, @Param("telefono")String telefono, @Param("direccion")String direccion,@Param("correo") String correo);
 
     @Transactional 
     @Modifying
     @Query(value="update vendedores set nombres =:valor where identificacion =:id", nativeQuery=true)
-    int actualizarVenta(@Param("id") Long id, @Param("valor") String valor);
+    int actualizarVendedor(@Param("id") Long id, @Param("valor") String valor);
 
     @Transactional
     @Modifying

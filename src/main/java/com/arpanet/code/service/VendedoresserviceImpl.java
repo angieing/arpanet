@@ -41,15 +41,15 @@ public class VendedoresserviceImpl implements Vendedoresservice{
 	}
 
     @Override
-	public Optional<VendedorEntitie> getVenta(Long id) {
+	public Optional<VendedorEntitie> getVendedores(Long id) {
 		return VendedoresRepository.findById(id);
 	}
 
 	/** inserta ventas nativa */
 	@Override
-    public int crearVentaSql(VendedorEntitie obj) {
+    public int crearVendedoresSql(VendedorEntitie obj) {
         int retorno = 0;		
-        retorno = VendedoresRepository.guardarVenta(obj.getTipoIdentificacion(), obj.getId(), obj.getNombres(), obj.getApellidos(),obj.getTelefono(),obj.getDireccion(),obj.getCorreo());
+        retorno = VendedoresRepository.guardarVendedor(obj.getTipoIdentificacion(), obj.getId(), obj.getNombres(), obj.getApellidos(),obj.getTelefono(),obj.getDireccion(),obj.getCorreo());
         return retorno;
     }
 
@@ -57,10 +57,10 @@ public class VendedoresserviceImpl implements Vendedoresservice{
 	 * Actualizar tabla ventas
 	 */
 	@Override
-	public int actualizarVentaSql(VendedorEntitie venta){
+	public int actualizarVendedoresSql(VendedorEntitie venta){
 		int retorno = 0;
 		try {
-			retorno = VendedoresRepository.actualizarVenta(venta.getId(), venta.getNombres());
+			retorno = VendedoresRepository.actualizarVendedor(venta.getId(), venta.getNombres());
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}
@@ -69,7 +69,7 @@ public class VendedoresserviceImpl implements Vendedoresservice{
 	}
 
 	@Override
-	public int borrarVentaSql(Long id){
+	public int borrarVendedoresSql(Long id){
 		int retorno = 0;
 		retorno = VendedoresRepository.borrar(id);
 		return retorno;

@@ -61,10 +61,10 @@ public class VendedorController {
      * @return
      */
 	@PostMapping(value = "crear")
-	public ResponseEntity<VendedorEntitie> crearVentaSql(@Valid @RequestBody VendedorEntitie vendedores){
+	public ResponseEntity<VendedorEntitie> crearVendedoresSql(@Valid @RequestBody VendedorEntitie vendedores){
 		System.out.println(" BODY: " + vendedores);
 		try {
-			int ver = service.crearVentaSql(vendedores);
+			int ver = service.crearVendedoresSql(vendedores);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("error:: " + e.getMessage());
@@ -74,9 +74,9 @@ public class VendedorController {
 	}
 
     @GetMapping("/{id}")
-	public ResponseEntity<VendedorEntitie> getVentaById(@PathVariable("id") Long id){
+	public ResponseEntity<VendedorEntitie> getVendedorById(@PathVariable("id") Long id){
 		System.out.println("Est:>>" + id);
-		VendedorEntitie vendedores = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("No encontrado $id: "+ id));
+		VendedorEntitie vendedores = service.getVendedores(id).orElseThrow(() -> new ModeloNotFoundException("No encontrado $id: "+ id));
 		return new ResponseEntity<VendedorEntitie>(vendedores, HttpStatus.OK);
 	}
 
@@ -89,7 +89,7 @@ public class VendedorController {
 	@PutMapping("/{id}")
 	public int updateVenta(@PathVariable("id") Long id, @Valid @RequestBody VendedorEntitie vendedores) {
 		System.out.println("==========>>> " + vendedores + " /// "+ id);
-        VendedorEntitie vendedoresUp = service.getVenta(id).orElseThrow(() -> new ModeloNotFoundException("No encontrado"));
+        VendedorEntitie vendedoresUp = service.getVendedores(id).orElseThrow(() -> new ModeloNotFoundException("No encontrado"));
 		vendedoresUp.setTipoIdentificacion(vendedores.getTipoIdentificacion());
 		vendedoresUp.setId(vendedores.getId());
 		vendedoresUp.setNombres(vendedores.getNombres());
@@ -98,12 +98,12 @@ public class VendedorController {
 		vendedoresUp.setDireccion(vendedores.getDireccion());	
 		vendedoresUp.setCorreo(vendedores.getCorreo());
 		
-		return service.actualizarVentaSql(vendedoresUp);
+		return service.actualizarVendedoresSql(vendedoresUp);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<VendedorEntitie> deleteVentaSql(@PathVariable("id") Long id){
-		service.borrarVentaSql(id);
+		service.borrarVendedoresSql(id);
 		return ResponseEntity.ok().build();
 	}
 

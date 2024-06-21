@@ -8,9 +8,9 @@ import com.arpanet.code.model.VendedorEntitie;
 public interface Vendedoresservice {
 	    
     public List<VendedorEntitie> listaAll();    
-    public Optional<VendedorEntitie> getVenta(Long id);
-    public int crearVentaSql(VendedorEntitie venta);
-    public int actualizarVentaSql(VendedorEntitie venta);
-    public int borrarVentaSql(Long id);
+    public Optional<VendedorEntitie> getVendedores(Long id);
+    public int crearVendedoresSql(VendedorEntitie venta);
+    public int actualizarVendedoresSql(VendedorEntitie venta);
+    public int borrarVendedoresSql(Long id);
 
 }
