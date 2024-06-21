@@ -65,8 +65,8 @@ public class VentaserviceImpl implements Ventaservice{
 			obj.setTotal(((BigDecimal)ver.get(i)[4]).floatValue());
 			obj.setVendedor(((BigDecimal)ver.get(i)[5]).intValue());
 			obj.setCliente(((BigDecimal)ver.get(i)[6]).intValue());
-			obj.setTipo_clientes(String.valueOf(ver.get(i)[7]));
-			obj.setTipo_vendedor(String.valueOf(ver.get(i)[8]));
+			//obj.setTipo_clientes(String.valueOf(ver.get(i)[7]));
+			//obj.setTipo_vendedor(String.valueOf(ver.get(i)[8]));
             lista.add(obj);
         }       
 		return lista;
@@ -76,7 +76,7 @@ public class VentaserviceImpl implements Ventaservice{
 	@Override
     public int crearVentaSql(VentaEntitie obj) {
         int retorno = 0;		
-        retorno = ventaRepositorio.guardarVenta(obj.getFecha(), obj.getSubtotal(), obj.getImpuestos(), obj.getTotal(), obj.getVendedor(),obj.getCliente(),obj.getTipo_clientes(),obj.getTipo_vendedor());
+        retorno = ventaRepositorio.guardarVenta(obj.getFecha(), obj.getSubtotal(), obj.getImpuestos(), obj.getTotal(), obj.getVendedor(),obj.getCliente());
         return retorno;
     }
 
@@ -85,16 +85,14 @@ public class VentaserviceImpl implements Ventaservice{
 	 */
 	@Override
 	public int actualizarVentaSql(Long id,VentaEntitie venta){
-		
 		int retorno = 0;
 		try {
 			System.out.println("REsibe?:: " +venta);
-			retorno = ventaRepositorio.actualizarVenta(id, venta.getSubtotal());
+			retorno = ventaRepositorio.actualizarVenta(id, venta.getCliente(), venta.getFecha(), venta.getImpuestos(), venta.getSubtotal(), venta.getTotal(), venta.getVendedor());
 			System.out.println("etorna?:: " +retorno);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
-		}
-		
+		}		
 		return retorno;
 	}
 
@@ -127,8 +125,8 @@ public class VentaserviceImpl implements Ventaservice{
 			obj.setTotal(((BigDecimal)ver.get(i)[4]).floatValue());
 			obj.setVendedor(((BigDecimal)ver.get(i)[5]).intValue());
 			obj.setCliente(((BigDecimal)ver.get(i)[6]).intValue());
-			obj.setTipo_clientes(String.valueOf(ver.get(i)[7]));
-			obj.setTipo_vendedor(String.valueOf(ver.get(i)[8]));
+			//obj.setTipo_clientes(String.valueOf(ver.get(i)[7]));
+			//obj.setTipo_vendedor(String.valueOf(ver.get(i)[8]));
             lista.add(obj);
         }       
 		return lista;
@@ -170,11 +168,7 @@ public class VentaserviceImpl implements Ventaservice{
 	@Override
 	public List<VentasDTO> buscarPromedioVentasCliente() {
 		List<VentasDTO> lista = new ArrayList<>();
-		List<Object[]> ver = ventaRepositorio.buscarPromedioVentasCliente();	
-		System.out.println("ver: " + ver.get(0)[0].getClass().getSimpleName());
-		System.out.println("ver: " + ver.get(0)[1].getClass().getSimpleName());
-		System.out.println("ver: " + ver.get(0)[2].getClass().getSimpleName());
-		
+		List<Object[]> ver = ventaRepositorio.buscarPromedioVentasCliente();			
         for (int i = 0; i < ver.size(); i++) {
             VentasDTO obj = new VentasDTO();		         
             obj.setCliente(((BigDecimal)ver.get(i)[0]).intValue());
@@ -198,7 +192,7 @@ public class VentaserviceImpl implements Ventaservice{
             obj.setAnio(((BigDecimal)ver.get(i)[1]));            
 			obj.setTotal(((BigDecimal)ver.get(i)[2]).floatValue());				
             lista.add(obj);
-        }       
+        }        
 		return lista;
 	}
 }

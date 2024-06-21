@@ -23,13 +23,13 @@ public interface VentaRepositorio extends JpaRepository<VentaEntitie, Long> {
 
     @Transactional 
     @Modifying
-    @Query(value="insert into ventas  VALUES (sec_ventas.nextval, :fecha, :subtotal, :impuestos, :total, :vendedor, :cliente, :tipoClientes, :tipoVendedor)", nativeQuery=true)
-    int guardarVenta(@Param("fecha") Date fecha, @Param("subtotal") Float subtotal, @Param("impuestos") Float impuestos, @Param("total")Float total,@Param("vendedor") Integer vendedor, @Param("cliente")Integer cliente, @Param("tipoClientes") String tipoClientes, @Param("tipoVendedor") String tipoVendedor);
+    @Query(value="insert into ventas  VALUES (sec_ventas.nextval, :fecha, :subtotal, :impuestos, :total, :vendedor, :cliente)", nativeQuery=true)
+    int guardarVenta(@Param("fecha") Date fecha, @Param("subtotal") Float subtotal, @Param("impuestos") Float impuestos, @Param("total")Float total,@Param("vendedor") Integer vendedor, @Param("cliente")Integer cliente);
 
     @Transactional 
     @Modifying
-    @Query(value="update ventas set subtotal =:valor where id_factura =:id", nativeQuery=true)
-    int actualizarVenta(@Param("id") Long id, @Param("valor") Float valor);
+    @Query(value="update ventas set cliente=:cliente, fecha=:fecha, impuestos=:impuestos, subtotal=:subtotal, total=:total, vendedor=:vendedor where id_factura=:id", nativeQuery=true)
+    int actualizarVenta(@Param("id") Long id, @Param("cliente") Integer cliente, @Param("fecha") Date fecha,@Param("impuestos") Float impuestos,@Param("subtotal") Float subtotal, @Param("total") Float total, @Param("vendedor") Integer vendedor);
 
     @Transactional
     @Modifying
