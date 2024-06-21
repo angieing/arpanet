@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.arpanet.code.dto.VentasDTO;
 import com.arpanet.code.exception.ModeloNotFoundException;
 import com.arpanet.code.model.VentaEntitie;
 import com.arpanet.code.service.Ventaservice;
@@ -98,4 +99,52 @@ public class VentaController {
 		service.borrarVentaSql(id);
 		return ResponseEntity.ok().build();
 	}
+
+	/**
+	 * Buscar todas las ventas por un año específico
+	 * @return
+	 */
+	@GetMapping(value = "buscar/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> buscarPorAnio(@PathVariable("anio") int anio) {		
+		List<VentaEntitie> Ventas = new ArrayList<>();
+		System.out.println("===>" + anio);
+		 Ventas = service.buscarPorAnio(anio);		 
+		return new ResponseEntity<>(Ventas, HttpStatus.OK);
+	}
+
+	/**
+	 *  Cual es el vendedor que más ha vendido
+	 * @return
+	 */
+	@GetMapping(value = "/ver-mas-vendido", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> buscarVendedorMasVendido() {		
+		List<VentasDTO> Ventas = new ArrayList<>();		
+		 Ventas = service.buscarMasVendidoVendedor();		 
+		return new ResponseEntity<>(Ventas, HttpStatus.OK);
+	}
+
+	/**
+	 *  Cuanto se ha vendido en un año específico
+	 * @return
+	 */
+	@GetMapping(value = "/anio-especifico/{anio}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> buscarPorAnioEspecifico(@PathVariable("anio") int anio) {		
+		List<VentasDTO> Ventas = new ArrayList<>();		
+		 Ventas = service.buscarPorAnioEspecifico(anio);		 
+		return new ResponseEntity<>(Ventas, HttpStatus.OK);
+	}
+
+	/**
+	 *  Promedio ventas por cliente
+	 * @return
+	 */
+	@GetMapping(value = "/promedio-ventas-cliente", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> buscarPromedioVentasCliente() {		
+		List<VentasDTO> Ventas = new ArrayList<>();		
+		 Ventas = service.buscarPromedioVentasCliente();		 
+		return new ResponseEntity<>(Ventas, HttpStatus.OK);
+	}
+
+
+
 }

@@ -3,6 +3,7 @@ package com.arpanet.code.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.arpanet.code.dto.VentasDTO;
 import com.arpanet.code.model.VentaEntitie;
 
 public interface Ventaservice {
@@ -16,6 +17,12 @@ public interface Ventaservice {
     public int crearVentaSql(VentaEntitie venta);
     public int actualizarVentaSql(Long id,VentaEntitie venta);
     public int borrarVentaSql(Long id);
+
+    //indicadores
+    public List<VentaEntitie> buscarPorAnio(int anio);
+    public List<VentasDTO> buscarMasVendidoVendedor();
+    public List<VentasDTO> buscarPorAnioEspecifico(int anio);
+    public List<VentasDTO> buscarPromedioVentasCliente();
 
 }
 
